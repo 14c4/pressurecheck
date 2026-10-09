@@ -4,7 +4,7 @@ A local interview-practice prototype built with React, TypeScript, and Vite.
 
 ## Current prototype
 
-Milestone 2 provides real microphone recording and playback in a call-style
+Current build provides real microphone recording and playback in a call-style
 interview workspace. The homepage and Home/Practice navigation are preserved.
 
 The workflow has four states:
