@@ -7,11 +7,4 @@ export type RecordedAnswer = {
   durationSeconds: number
 }
 
-export type AnswerFeedback = {
-  source: 'sample' | 'gemini'
-  transcript: string | null
-  exampleAnswer?: string
-  strengths: readonly string[]
-  improvements: readonly string[]
-  nextAttemptFocus: string
-}
+export type { AnalysisResult as AnswerFeedback } from '../../shared/analysis.ts'

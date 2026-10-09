@@ -5,13 +5,17 @@ import Icon from './Icon'
 type RecordingPanelProps = {
   recorder: ReturnType<typeof useAudioRecorder>
   onSubmit: () => void
+  onDiscard: () => void
+  analysisPending: boolean
+  analysisError: string | null
+  onCancelAnalysis: () => void
 }
 
 function formatTime(seconds: number) {
   return `${Math.floor(seconds / 60).toString().padStart(2, '0')}:${(seconds % 60).toString().padStart(2, '0')}`
 }
 
-function RecordingPanel({ recorder, onSubmit }: RecordingPanelProps) {
+function RecordingPanel({ recorder, onSubmit, onDiscard, analysisPending, analysisError, onCancelAnalysis }: RecordingPanelProps) {
   const { phase, busy, elapsedSeconds, recordedAnswer, error, supportError } = recorder
   const audioRef = useRef<HTMLAudioElement>(null)
   const stopRef = useRef<HTMLButtonElement>(null)
@@ -54,7 +58,8 @@ function RecordingPanel({ recorder, onSubmit }: RecordingPanelProps) {
     }
   }, [recordedAnswer?.url])
 
-  const status = busy === 'requesting' ? 'Waiting for permission'
+  const status = analysisPending ? 'Submitting for analysis'
+    : busy === 'requesting' ? 'Waiting for permission'
     : busy === 'stopping' ? 'Finishing recording'
       : phase === 'recording' ? 'Recording'
         : phase === 'review' ? 'Ready to review' : 'Ready'
@@ -93,6 +98,7 @@ function RecordingPanel({ recorder, onSubmit }: RecordingPanelProps) {
 
       <div className="recording-bottom-bar">
         {(error || supportError) && <p className="recording-error" role="alert">{error || supportError}</p>}
+        {analysisError && <p className="recording-error" role="alert">{analysisError}</p>}
 
         {phase === 'review' && recordedAnswer && (
           <div className="audio-review">
@@ -120,16 +126,19 @@ function RecordingPanel({ recorder, onSubmit }: RecordingPanelProps) {
           )}
           {phase === 'review' && (
             <>
-              <button className="button button-secondary" type="button" onClick={recorder.discard}>Discard &amp; Rerecord</button>
-              <button className="button button-primary" type="button" onClick={onSubmit}>Submit for Analysis</button>
+              <button className="button button-secondary" type="button" onClick={onDiscard}>Discard &amp; Rerecord</button>
+              <button className="button button-primary" type="button" onClick={onSubmit} disabled={analysisPending}>
+                {analysisPending ? 'Submitting…' : 'Submit for Analysis'}
+              </button>
+              {analysisPending && <button className="button button-secondary" type="button" onClick={onCancelAnalysis}>Cancel Analysis</button>}
             </>
           )}
         </div>
 
         <p className="supporting-text recording-note">
           {phase === 'review'
-            ? 'Gemini is not connected. Submission opens sample feedback; your recording is not uploaded or analyzed.'
-            : 'Microphone only. Audio stays in this tab and is cleared when you discard it or leave Practice.'}
+            ? 'Submission sends your audio to the local backend and, when configured, to Gemini. This app does not save recordings.'
+            : 'Microphone only. Audio stays in this tab until you submit, and is cleared when you discard it or leave Practice.'}
         </p>
       </div>
     </section>

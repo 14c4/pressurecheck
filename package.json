@@ -5,15 +5,22 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:server": "node --env-file-if-exists=server/.env --watch server/index.ts",
+    "start:server": "node --env-file-if-exists=server/.env server/index.ts",
     "build": "tsc -b && vite build",
+    "test": "node --test tests/*.test.ts",
+    "test:live": "node --env-file-if-exists=server/.env scripts/test-live.ts",
     "lint": "oxlint",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@google/genai": "^2.28.0",
+    "busboy": "^1.6.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
   },
   "devDependencies": {
+    "@types/busboy": "^1.5.4",
     "@types/node": "^24.13.3",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.7",
@@ -21,5 +28,6 @@
     "oxlint": "^1.81.0",
     "typescript": "~6.0.2",
     "vite": "^8.3.0"
-  }
+  },
+  "engines": { "node": ">=24.0.0" }
 }

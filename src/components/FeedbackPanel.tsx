@@ -6,51 +6,43 @@ type FeedbackPanelProps = {
 }
 
 function FeedbackPanel({ feedback, onRetry }: FeedbackPanelProps) {
-  const isSample = feedback.source === 'sample'
+  const insufficient = feedback.status === 'insufficient'
 
   return (
     <section className="panel feedback-panel" aria-labelledby="feedback-heading">
       <div className="panel-header feedback-header">
-        <h2 id="feedback-heading">{isSample ? 'AI Feedback · Sample preview' : 'AI Feedback'}</h2>
-        {isSample && <span className="availability-label">Gemini · Not connected</span>}
+        <h2 id="feedback-heading">AI Feedback</h2>
+        <span className="availability-label">{insufficient ? 'Insufficient audio for evaluation' : 'Analysis complete'}</span>
       </div>
 
-      {isSample && (
-        <p className="sample-notice">
-          No actual analysis has occurred. This is example feedback for a written sample answer,
-          not your recording. Your audio has not been uploaded or transcribed.
-        </p>
-      )}
+      <section className={insufficient ? 'sample-notice' : 'feedback-summary'} aria-labelledby="summary-heading">
+        <h3 id="summary-heading">Summary</h3>
+        <p className="transcript-text">{feedback.summary}</p>
+      </section>
 
       <div className="feedback-content">
         <section className="transcript-section" aria-labelledby="transcript-heading">
           <h3 id="transcript-heading">Your answer transcription</h3>
-          <p className={!isSample && feedback.transcript ? 'transcript-text' : 'empty-text'}>
-            {!isSample && feedback.transcript
-              ? feedback.transcript : 'Unavailable — your recording has not been transcribed.'}
+          <p className={feedback.transcript ? 'transcript-text' : 'empty-text'}>
+            {feedback.transcript || 'No reliable speech could be transcribed.'}
           </p>
         </section>
 
-        {isSample && feedback.exampleAnswer && (
-          <section className="written-example" aria-labelledby="example-heading">
-            <h3 id="example-heading">Written example answer (not your transcript)</h3>
-            <p className="transcript-text">{feedback.exampleAnswer}</p>
-          </section>
+        {!insufficient && (
+          <div className="feedback-columns">
+            <section aria-labelledby="strengths-heading">
+              <h3 id="strengths-heading">Strengths</h3>
+              <ul>{feedback.strengths.map((strength) => <li key={strength}>{strength}</li>)}</ul>
+            </section>
+            <section aria-labelledby="improvements-heading">
+              <h3 id="improvements-heading">Areas for improvement</h3>
+              <ul>{feedback.improvements.map((improvement) => <li key={improvement}>{improvement}</li>)}</ul>
+            </section>
+          </div>
         )}
 
-        <div className="feedback-columns">
-          <section aria-labelledby="strengths-heading">
-            <h3 id="strengths-heading">{isSample ? 'Example strengths' : 'Strengths'}</h3>
-            <ul>{feedback.strengths.map((strength) => <li key={strength}>{strength}</li>)}</ul>
-          </section>
-          <section aria-labelledby="improvements-heading">
-            <h3 id="improvements-heading">{isSample ? 'Example areas for improvement' : 'Areas for improvement'}</h3>
-            <ul>{feedback.improvements.map((improvement) => <li key={improvement}>{improvement}</li>)}</ul>
-          </section>
-        </div>
-
-        <section className="next-attempt sample-suggestion" aria-labelledby="next-attempt-heading">
-          <h3 id="next-attempt-heading">{isSample ? 'Example next-attempt suggestion' : 'Next attempt'}</h3>
+        <section className="next-attempt next-attempt-suggestion" aria-labelledby="next-attempt-heading">
+          <h3 id="next-attempt-heading">Next attempt</h3>
           <p className="suggestion-text">{feedback.nextAttemptFocus}</p>
         </section>
       </div>

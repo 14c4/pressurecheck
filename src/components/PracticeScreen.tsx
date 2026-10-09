@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import type { InterviewQuestion } from '../data/question'
-import { mockFeedback } from '../data/mockFeedback'
+import { useAnswerAnalysis } from '../hooks/useAnswerAnalysis'
 import { useAudioRecorder } from '../hooks/useAudioRecorder'
 import FeedbackPanel from './FeedbackPanel'
 import Icon from './Icon'
@@ -14,7 +14,8 @@ type PracticeScreenProps = {
 
 function PracticeScreen({ question, onBack }: PracticeScreenProps) {
   const recorder = useAudioRecorder()
-  const [showFeedback, setShowFeedback] = useState(false)
+  const analysis = useAnswerAnalysis()
+  const showFeedback = Boolean(analysis.result)
   const headingRef = useRef<HTMLHeadingElement>(null)
 
   useEffect(() => {
@@ -23,12 +24,14 @@ function PracticeScreen({ question, onBack }: PracticeScreenProps) {
   }, [showFeedback])
 
   function submit() {
-    if (recorder.phase === 'review' && recorder.recordedAnswer) setShowFeedback(true)
+    if (recorder.phase === 'review' && recorder.recordedAnswer) {
+      void analysis.submit(question.prompt, recorder.recordedAnswer)
+    }
   }
 
   function tryAgain() {
+    analysis.reset()
     recorder.discard()
-    setShowFeedback(false)
   }
 
   return (
@@ -42,8 +45,8 @@ function PracticeScreen({ question, onBack }: PracticeScreenProps) {
         </button>
       </div>
 
-      {showFeedback ? (
-        <FeedbackPanel feedback={mockFeedback} onRetry={tryAgain} />
+      {analysis.result ? (
+        <FeedbackPanel feedback={analysis.result} onRetry={tryAgain} />
       ) : (
         <>
           <section className="panel question-panel" aria-labelledby="question-heading">
@@ -61,7 +64,8 @@ function PracticeScreen({ question, onBack }: PracticeScreenProps) {
           </section>
 
           <div className="practice-grid">
-            <RecordingPanel recorder={recorder} onSubmit={submit} />
+            <RecordingPanel recorder={recorder} onSubmit={submit} onDiscard={tryAgain}
+              analysisPending={analysis.pending} analysisError={analysis.error} onCancelAnalysis={analysis.reset} />
             <LiveSignalsPanel />
           </div>
         </>
