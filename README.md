@@ -3,7 +3,7 @@
 A local interview-practice application: React + TypeScript + Vite, real microphone
 recording/playback, and a minimal Node backend for Gemini audio analysis.
 
-PressureCheck's hackathon goal adds an ElevenLabs interviewer and optional
+PressureCheck's goal adds an ElevenLabs interviewer and optional
 validated Presage measurements to this practice loop, with guided retry and
 evidence-grounded improvement. Those additions are planned, not implemented.
 
