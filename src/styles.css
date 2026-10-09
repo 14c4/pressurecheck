@@ -1,0 +1,224 @@
+:root {
+  font-family: Inter, 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: #eef1f5;
+  background: #0b0e13;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color-scheme: dark;
+  --muted: #a2aab8;
+  --accent: #9be5cc;
+  --border: #29313b;
+  --surface: #151b23;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; }
+button, a { -webkit-tap-highlight-color: transparent; }
+button { font: inherit; cursor: pointer; }
+button:focus-visible, a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+button:disabled { cursor: not-allowed; }
+::selection { color: #0b0e13; background: var(--accent); }
+
+.app-shell {
+  max-width: 1240px;
+  min-height: 100svh;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #eef1f5;
+  font-size: 18px;
+  font-weight: 650;
+  letter-spacing: -0.5px;
+}
+.brand-mark {
+  display: grid;
+  place-content: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid #3a574e;
+  border-radius: 10px;
+  background: #172a24;
+  color: var(--accent);
+  font-size: 26px;
+  line-height: 1;
+}
+.navigation { display: flex; gap: 6px; }
+.nav-button {
+  padding: 9px 16px;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.nav-button:hover { color: #eef1f5; background: #171c24; }
+.nav-button[aria-current='page'] { background: #1b222b; color: #eef1f5; }
+main { padding: 32px 0 40px; }
+main:focus { outline: none; }
+h1, h2, h3, p { margin-top: 0; }
+h1 { font-weight: 600; letter-spacing: -0.8px; }
+h2 { margin-bottom: 0; font-size: 16px; font-weight: 600; line-height: 1.5; }
+h3 { margin-bottom: 10px; font-size: 13px; font-weight: 600; line-height: 1.5; }
+.supporting-text { margin-bottom: 0; color: var(--muted); font-size: 12px; line-height: 1.65; }
+.panel { min-width: 0; padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; }
+.panel-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.tag, .availability-label { padding: 4px 8px; border-radius: 5px; font-size: 11px; line-height: 1.5; white-space: nowrap; }
+.tag { color: var(--accent); background: #21352e; border: 1px solid #344c42; }
+.availability-label { color: var(--muted); background: #202731; border: 1px solid #35404c; }
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.button-primary { color: #10231c; background: var(--accent); }
+.button-primary:hover:not(:disabled) { background: #b8f1df; }
+.button-secondary { color: #e0e6ed; background: #202833; border-color: #35404c; }
+.button-secondary:hover:not(:disabled) { background: #2b3542; border-color: #506175; }
+.button-small { padding: 9px 12px; font-size: 12px; }
+.button-primary:disabled { color: #bacac5; background: #283e35; border-color: #3b5248; }
+.button-secondary:disabled { color: #8d99a9; background: #1c232c; border-color: var(--border); }
+.icon { flex-shrink: 0; width: 18px; height: 18px; }
+
+/* Home */
+.home-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 40px;
+  padding: 16px 0;
+}
+.home-copy h1 { max-width: 440px; margin-bottom: 14px; font-size: clamp(30px, 3.4vw, 40px); line-height: 1.2; }
+.intro { margin-bottom: 24px; color: var(--muted); font-size: 15px; line-height: 1.7; }
+.preview-prompt { margin: 18px 0 0; font-size: 16px; line-height: 1.7; }
+
+/* Interview call: question above a large recording stage and secondary signals. */
+.workspace-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 24px; }
+.workspace-header h1 { margin-bottom: 0; font-size: 26px; line-height: 1.3; }
+.back-button { display: inline-flex; align-items: center; gap: 8px; padding: 5px 0; border: 0; background: none; color: var(--muted); font-size: 12px; }
+.back-button:hover { color: var(--accent); }
+.practice-grid { display: grid; grid-template-columns: minmax(0, 1fr) 270px; gap: 20px; align-items: start; }
+.question-panel { margin-bottom: 20px; border-color: #3b4e47; }
+.question-prompt { margin: 14px 0 16px; font-size: clamp(20px, 2.2vw, 26px); font-weight: 500; line-height: 1.5; letter-spacing: -0.35px; }
+.voice-control { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+#practice-heading:focus, #recording-heading:focus { outline: 2px solid var(--accent); outline-offset: 5px; border-radius: 2px; }
+
+/* Only microphone audio is captured. The stage reserves space for a future camera. */
+.recording-panel.panel { padding: 0; overflow: hidden; }
+.recording-topbar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; padding: 18px 22px; }
+.recording-status-group { display: flex; align-items: center; gap: 16px; }
+.recording-status { display: inline-flex; align-items: center; gap: 7px; color: var(--muted); font-size: 12px; }
+.is-recording { color: #f5aaa9; }
+.recording-dot { width: 7px; height: 7px; border-radius: 50%; background: #ef9291; }
+.recording-timer { font-size: 18px; font-variant-numeric: tabular-nums; font-weight: 500; letter-spacing: 0.5px; }
+.interview-stage { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 320px; padding: 40px 24px 72px; background: #0f151d; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); text-align: center; }
+.stage-microphone { display: grid; place-items: center; width: 76px; height: 76px; margin-bottom: 20px; border-radius: 50%; background: #203129; border: 1px solid #344c42; color: var(--accent); }
+.stage-microphone .icon { width: 30px; height: 30px; }
+.stage-title { margin-bottom: 8px; font-size: 18px; font-weight: 500; }
+.stage-description { max-width: 380px; }
+.stage-camera-label { position: absolute; left: 22px; bottom: 20px; display: inline-flex; align-items: center; gap: 8px; color: var(--muted); font-size: 11px; }
+.stage-camera-label .icon { width: 15px; height: 15px; }
+.recording-bottom-bar { padding: 20px 22px; }
+.recording-controls { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; }
+.recording-note { margin-top: 14px; text-align: center; }
+.button-stop { color: #ffd1d0; background: #4a292d; border-color: #774247; }
+.button-stop:hover:not(:disabled) { background: #603238; }
+.button-stop:disabled { color: #d2adac; background: #36272a; }
+.recording-error { margin-bottom: 16px; padding: 12px; border: 1px solid #774247; border-radius: 8px; background: #302026; color: #f5b7b5; font-size: 13px; line-height: 1.7; }
+.audio-review { margin-bottom: 18px; }
+.audio-review label { display: block; margin-bottom: 10px; }
+.audio-review audio { display: block; width: 100%; height: 42px; }
+.placeholder-title { margin: 0 0 3px; font-size: 12px; font-weight: 500; }
+
+/* Signals never display generated values. */
+.provider-description { margin-top: 5px; }
+.camera-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 7px; min-height: 164px; margin: 18px 0; padding: 16px; border: 1px dashed #35404c; border-radius: 8px; background: #10161e; text-align: center; color: var(--muted); }
+.camera-placeholder .icon { width: 26px; height: 26px; margin-bottom: 6px; }
+.signal-metrics { display: grid; gap: 14px; margin: 0; }
+.signal-metrics > div { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.signal-metrics dt { color: var(--muted); font-size: 12px; }
+.signal-metrics dd { margin: 0; font-size: 22px; font-variant-numeric: tabular-nums; }
+.signal-metrics dd span { color: var(--muted); font-size: 10px; }
+.connection-status { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 11px; line-height: 1.6; }
+.connection-status strong { color: #c1c9d5; font-weight: 500; }
+.signal-note { margin-top: 12px; font-size: 11px; }
+
+/* Results replace the active interview; sample data is never the user's transcript. */
+.feedback-panel { max-width: 940px; margin: 0 auto; }
+.sample-notice { margin: 18px 0 0; padding: 12px 14px; border: 1px solid #3d554b; border-radius: 8px; color: #c4e7d9; background: #1a2c25; font-size: 12px; line-height: 1.7; }
+.feedback-content { margin-top: 20px; }
+.transcript-section { padding: 16px; background: #10161e; border: 1px solid var(--border); border-radius: 8px; }
+.transcript-text { margin-bottom: 0; color: #d1d8e3; font-size: 14px; line-height: 1.8; }
+.written-example { margin-top: 20px; }
+.empty-text { margin-bottom: 0; color: var(--muted); font-size: 12px; line-height: 1.7; }
+.feedback-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 20px; }
+.feedback-columns ul { margin: 0; padding-left: 18px; color: #c5ceda; font-size: 13px; line-height: 1.8; }
+.feedback-columns li + li { margin-top: 8px; }
+.feedback-columns li::marker { color: var(--muted); }
+.next-attempt { margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--border); }
+.sample-suggestion h3 { color: var(--accent); }
+.suggestion-text { margin-bottom: 0; color: #d1d8e3; font-size: 13px; line-height: 1.8; }
+.feedback-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 14px; margin-top: 20px; }
+
+.skip-link { position: fixed; top: 12px; left: 12px; z-index: 1; padding: 12px 16px; transform: translateY(-150%); border-radius: 8px; background: var(--accent); color: #10231c; }
+.skip-link:focus { transform: translateY(0); }
+
+@media (max-width: 900px) {
+  .app-shell { padding: 0 24px; }
+  .practice-grid { grid-template-columns: minmax(0, 1fr) 250px; gap: 16px; }
+  .panel { padding: 20px; }
+  .home-layout { gap: 24px; }
+}
+
+@media (max-width: 760px) {
+  .home-layout, .practice-grid, .feedback-columns { grid-template-columns: 1fr; }
+  .home-layout { gap: 28px; padding: 0; }
+  .home-copy h1 { max-width: none; }
+  .feedback-columns { gap: 20px; }
+  .camera-placeholder { min-height: 140px; }
+}
+
+@media (max-width: 480px) {
+  .app-shell { padding: 0 16px; }
+  .site-header { padding: 16px 0; gap: 12px; flex-wrap: wrap; }
+  .brand { font-size: 16px; gap: 8px; }
+  .brand-mark { width: 30px; height: 30px; font-size: 23px; }
+  .nav-button { padding: 8px 10px; font-size: 12px; }
+  .navigation { gap: 2px; }
+  main { padding-top: 24px; }
+  .panel { padding: 18px; }
+  .workspace-header h1 { font-size: 23px; }
+  .recording-topbar, .recording-bottom-bar { padding: 16px; }
+  .recording-status-group { gap: 12px; }
+  .interview-stage { min-height: 260px; padding: 32px 18px 64px; }
+  .stage-camera-label { left: 16px; bottom: 16px; }
+  .recording-controls { flex-direction: column; align-items: stretch; }
+  .feedback-header { align-items: flex-start; }
+  .feedback-actions { align-items: flex-start; flex-direction: column; }
+}
