@@ -7,6 +7,9 @@ PressureCheck's hackathon goal adds an ElevenLabs interviewer and optional
 validated Presage measurements to this practice loop, with guided retry and
 evidence-grounded improvement. Those additions are planned, not implemented.
 
+Current build provides real microphone recording and playback in a call-style
+interview workspace. The homepage and Home/Practice navigation are preserved.
+
 ## Project documentation
 
 - [Technical roadmap](docs/ROADMAP.md): approved priorities, implementation status,
