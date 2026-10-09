@@ -87,7 +87,7 @@ the same endpoint; keep the backend running in its own terminal.
 
    ```dotenv
    ANALYSIS_PROVIDER=gemini
-   ANALYSIS_MODEL=gemini-2.5-flash
+   ANALYSIS_MODEL=gemini-3.8-flash
    GEMINI_API_KEY=YOUR_ACTUAL_KEY
    ANALYSIS_TIMEOUT_MS=60000
    ```
@@ -99,7 +99,7 @@ the same endpoint; keep the backend running in its own terminal.
 or a committed file. The SDK receives the backend's explicit `GEMINI_API_KEY`;
 no key is sent to the browser. Check `git status` before committing your work.
 
-`gemini-2.5-flash` supports audio input and structured output. The model remains
+`gemini-3.8-flash` supports audio input and structured output. The model remains
 configurable: use an available model supporting both capabilities for your project.
 The free tier does not require Cloud Billing; model availability and quotas depend
 on your account. Consult [API key setup](https://ai.google.dev/gemini-api/docs/api-key)
